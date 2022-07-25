@@ -7,6 +7,8 @@ router.route('/todos')
     
 router.route('/todos/:id')
     .get(httpTodos.getById)
+    .delete(httpTodos.deleteId)
+    .put(httpTodos.updateId)
 
 module.exports = {
     router

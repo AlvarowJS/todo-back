@@ -16,7 +16,7 @@ const getTodoById = (id) => {
 }
 
 const createTodo = (todoObj) => {
-    if (todoDB.length === 0){
+    if (todoDB.length === 0) {
         const newTodo = {
             id: 1,
             description: todoObj.description,
@@ -36,12 +36,36 @@ const createTodo = (todoObj) => {
         status: todoObj.status
     }
     todoDB.push(newTodo)
-    
+
     return newTodo
+}
+
+const deleteTodo = (id) => {
+    const index = todoDB.findIndex(item => item.id === id)
+    if (index !== -1) {
+        todoDB.splice(index, 1)
+        return todoDB
+    }
+}
+
+const updateTodo = (todoObj, id) => {
+    const index = todoDB.findIndex(item => item.id === id)
+    if (todoObj.description && todoObj.currentTime && todoObj.member && todoObj.status) {
+        todoDB[index] = {
+            id,
+            description: todoObj.description,
+            currentTime: todoObj.currentTime,
+            member: todoObj.member,
+            status: todoObj.status            
+        }
+        return todoDB
+    }
 }
 
 module.exports = {
     getAllTodo: getAllTodo,
     getTodoById: getTodoById,
-    createTodo: createTodo
+    createTodo: createTodo,
+    deleteTodo: deleteTodo,
+    updateTodo: updateTodo
 }
